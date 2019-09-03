@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_bottom"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_height="48dp">
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="back"
+            android:background="@drawable/back_select"
+          android:layout_alignParentStart="true"
+            android:layout_height="36dp" />
+        <TextView
+            android:text="打卡"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="saveRecord"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/save_select"
+            android:layout_height="36dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:padding="8dp"
+        android:background="@drawable/border_bottom"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_label_day"
+            android:text="日         期："
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+        <TextView
+            android:id="@+id/tv_tv_day"
+            android:layout_toRightOf="@id/tv_label_day"
+            android:onClick="showChooseDay"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+        <TextView
+            android:id="@+id/tv_label_time_type"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tv_label_day"
+            android:text="工作时间："
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_toRightOf="@id/tv_label_time_type"
+            android:id="@+id/rg_time_type"
+            android:layout_below="@id/tv_tv_day"
+            android:orientation="horizontal"
+            android:layout_height="36dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:text="整天"
+                android:id="@+id/rb_one"
+                android:layout_weight="1"
+                android:layout_height="36dp" />
+            <RadioButton
+                android:text="时段"
+                android:id="@+id/rb_part"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="36dp" />
+            <RadioButton
+                android:id="@+id/rb_none"
+                android:text="休息"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="36dp" />
+
+        </RadioGroup>
+    </RelativeLayout>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:padding="8dp"
+
+    android:layout_height="0dp">
+    <RelativeLayout
+        android:id="@+id/fll_one"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/fr_tv_label_land"
+            android:text="工地："
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+        <AutoCompleteTextView
+            android:id="@+id/fr_actv_land"
+            android:layout_toRightOf="@id/fr_tv_label_land"
+            android:layout_width="match_parent"
+            android:completionThreshold="1"
+            android:singleLine="true"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_below="@id/fr_tv_label_land"
+            android:id="@+id/fr_tv_label_work_type"
+            android:gravity="center_vertical"
+            android:text="工资类型："
+            android:layout_width="wrap_content"
+            android:layout_height="36dp" />
+        <RadioGroup
+            android:layout_below="@id/fr_actv_land"
+            android:layout_toRightOf="@id/fr_tv_label_work_type"
+            android:layout_width="match_parent"
+            android:id="@+id/rg_one_pay_type"
+            android:orientation="horizontal"
+            android:layout_height="36dp">
+            <RadioButton
+                android:text="包工"
+                android:layout_width="0dp"
+                android:id="@+id/rg_one_rb_bg"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_height="36dp" />
+            <RadioButton
+                android:text="点工"
+                android:id="@+id/rg_one_rb_dg"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_height="36dp" />
+        </RadioGroup>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/fill_part"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/border_bottom"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:text="上午"
+            android:id="@+id/cb_sw"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="8dp"
+            android:layout_height="36dp" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="时间(天)："
+                android:layout_width="wrap_content"
+                android:id="@+id/s_rt_label_count"
+                android:gravity="center_vertical"
+                android:layout_height="36dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/s_rt_label_count"
+                android:inputType="number"
+                android:id="@+id/s_ret_count"
+                android:layout_height="36dp" />
+            <TextView
+                android:text="工资类型："
+                android:id="@+id/s_rt_label_pay_type"
+                android:layout_below="@id/s_rt_label_count"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/s_rt_label_pay_type"
+                android:layout_below="@id/s_ret_count"
+                android:orientation="horizontal"
+                android:id="@+id/s_rg_pay_type"
+                android:layout_height="36dp">
+                <RadioButton
+                    android:text="包工"
+                    android:layout_width="0dp"
+                    android:id="@+id/s_rg_rb_bg"
+                    android:layout_weight="1"
+                    android:layout_height="36dp" />
+                <RadioButton
+                    android:text="点工"
+                    android:layout_width="0dp"
+                    android:id="@+id/s_rg_rb_dg"
+                    android:layout_weight="1"
+                    android:layout_height="36dp" />
+            </RadioGroup>
+            <TextView
+                android:text="工地："
+                android:layout_below="@id/s_rt_label_pay_type"
+                android:id="@+id/s_tv_label_land"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp" />
+            <AutoCompleteTextView
+                android:id="@+id/s_ractv_land"
+                android:layout_toRightOf="@id/s_tv_label_land"
+                android:layout_below="@+id/s_rg_pay_type"
+                android:layout_width="match_parent"
+                android:completionThreshold="1"
+                android:singleLine="true"
+                android:layout_height="36dp" />
+        </RelativeLayout>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/border_bottom"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:text="下午"
+                android:id="@+id/cb_xw"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_height="36dp" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="时间(天)："
+                    android:layout_width="wrap_content"
+                    android:id="@+id/x_rt_label_count"
+                    android:gravity="center_vertical"
+                    android:layout_height="36dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/x_rt_label_count"
+                    android:id="@+id/x_ret_count"
+                    android:inputType="number"
+                    android:layout_height="36dp" />
+                <TextView
+                    android:text="工资类型："
+                    android:id="@+id/x_rt_label_pay_type"
+                    android:layout_below="@id/x_rt_label_count"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/x_rt_label_pay_type"
+                    android:layout_below="@id/x_ret_count"
+                    android:orientation="horizontal"
+                    android:id="@+id/x_rg_pay_type"
+                    android:layout_height="36dp">
+                    <RadioButton
+                        android:text="包工"
+                        android:layout_width="0dp"
+                        android:id="@+id/x_rg_rb_bg"
+                        android:layout_weight="1"
+                        android:layout_height="36dp" />
+                    <RadioButton
+                        android:text="点工"
+                        android:layout_width="0dp"
+                        android:id="@+id/x_rg_rb_dg"
+                        android:layout_weight="1"
+                        android:layout_height="36dp" />
+                </RadioGroup>
+                <TextView
+                    android:text="工地："
+                    android:layout_below="@id/x_rt_label_pay_type"
+                    android:id="@+id/x_tv_label_land"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+                <AutoCompleteTextView
+                    android:id="@+id/x_ractv_land"
+                    android:layout_toRightOf="@id/x_tv_label_land"
+                    android:layout_below="@+id/x_rg_pay_type"
+                    android:layout_width="match_parent"
+                    android:completionThreshold="1"
+                    android:singleLine="true"
+                    android:layout_height="36dp" />
+            </RelativeLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/border_bottom"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:text="晚上"
+                android:id="@+id/cb_ws"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="8dp"
+                android:layout_height="36dp" />
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="时间(天)："
+                    android:layout_width="wrap_content"
+                    android:id="@+id/w_rt_label_count"
+                    android:gravity="center_vertical"
+                    android:layout_height="36dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/w_rt_label_count"
+                    android:id="@+id/w_ret_count"
+                    android:inputType="number"
+                    android:layout_height="36dp" />
+                <TextView
+                    android:text="工资类型："
+                    android:id="@+id/w_rt_label_pay_type"
+                    android:layout_below="@id/w_rt_label_count"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_toRightOf="@id/w_rt_label_pay_type"
+                    android:layout_below="@id/w_ret_count"
+                    android:orientation="horizontal"
+                    android:id="@+id/w_rg_pay_type"
+                    android:layout_height="36dp">
+                    <RadioButton
+                        android:text="包工"
+                        android:layout_width="0dp"
+                        android:id="@+id/w_rg_rb_bg"
+                        android:layout_weight="1"
+                        android:layout_height="36dp" />
+                    <RadioButton
+                        android:text="点工"
+                        android:layout_width="0dp"
+                        android:id="@+id/w_rg_rb_dg"
+                        android:layout_weight="1"
+                        android:layout_height="36dp" />
+                </RadioGroup>
+                <TextView
+                    android:text="工地："
+                    android:layout_below="@id/w_rt_label_pay_type"
+                    android:id="@+id/w_tv_label_land"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp" />
+                <AutoCompleteTextView
+                    android:id="@+id/w_ractv_land"
+                    android:layout_toRightOf="@id/w_tv_label_land"
+                    android:layout_below="@+id/w_rg_pay_type"
+                    android:layout_width="match_parent"
+                    android:completionThreshold="1"
+                    android:singleLine="true"
+                    android:layout_height="36dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/fill_0"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+        <TextView
+            android:text="好好休息"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</FrameLayout>
+
+</LinearLayout>

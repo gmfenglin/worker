@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_bottom"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_height="48dp">
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="back"
+            android:background="@drawable/back_select"
+            android:layout_height="36dp" />
+       <AutoCompleteTextView
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:id="@+id/actv_base_data"
+           android:gravity="center_vertical"
+           android:completionThreshold="1"
+           android:singleLine="true"
+           android:layout_height="match_parent" />
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="search"
+            android:background="@drawable/search_select"
+            android:layout_height="36dp" />
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="showAdd"
+            android:background="@drawable/add_select"
+            android:layout_height="36dp" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/base_data_list"
+        android:layout_width="match_parent"
+        android:divider="#f00"
+        android:dividerHeight="1px"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:layout_height="match_parent">
+
+    </ListView>
+</LinearLayout>

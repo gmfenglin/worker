@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:background="@drawable/border_bottom"
+    android:layout_height="48dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:text="首页"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent" />
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_alignParentEnd="true"
+        android:onClick="showMenu"
+        android:background="@drawable/menu_select"
+        android:layout_height="48dp" />
+</RelativeLayout>
+<ListView
+    android:id="@+id/account_list"
+    android:layout_width="match_parent"
+    android:divider="#f00"
+    android:dividerHeight="1px"
+    android:scrollbars="none"
+    android:overScrollMode="never"
+    android:layout_height="match_parent">
+
+</ListView>
+
+
+
+
+
+
+</LinearLayout>
