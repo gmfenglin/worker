@@ -92,7 +92,7 @@ public class CalendarAdapter extends BaseAdapter {
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     ViewHolder myViewHolder = null;
-    if (convertView == null || convertView.getTag() == null) {
+    if (convertView == null ) {
       convertView = LayoutInflater.from(context).inflate(R.layout.item_select_time, null);
       myViewHolder = new ViewHolder();
 

@@ -27,7 +27,9 @@ import com.feng.lin.worker.ui.LandActivity;
 import com.feng.lin.worker.ui.MonthActivity;
 import com.feng.lin.worker.ui.WorkRecordActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         lvAccount=this.findViewById(R.id.account_list);
         accountAdatper= new AccountAdatper(this,dataSearch);
         lvAccount.setAdapter(accountAdatper);
+        TextView textView=findViewById(R.id.tv_today);
+        String today= new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        textView.setText("今天："+today);
         searchData();
     }
     public void searchData(){
