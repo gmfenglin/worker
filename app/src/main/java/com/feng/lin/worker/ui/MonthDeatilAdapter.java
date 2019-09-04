@@ -56,7 +56,7 @@ public class MonthDeatilAdapter  extends BaseAdapter {
         myViewHolder.tvLand.setText("工地："+data.get(position).get("landName").toString());
         myViewHolder.tvPayType.setText("工资类型："+data.get(position).get("payTypeName").toString());
         myViewHolder.tvTimeType.setText("时间："+data.get(position).get("timeTypeName").toString());
-        myViewHolder.tvWorkCount.setText("工天："+data.get(position).get("work_count").toString()+" 天");
+        myViewHolder.tvWorkCount.setText("工时："+data.get(position).get("work_count").toString()+" 小时");
         myViewHolder.tvZone.setText("时段："+data.get(position).get("timeZoneName").toString());
         return convertView;
     }

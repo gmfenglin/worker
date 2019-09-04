@@ -109,9 +109,9 @@ public class MonthActivity extends AppCompatActivity {
         }
         List<Map<String,Object>> countList=result.get("countList");
         TextView baoGong=(TextView)findViewById(R.id.ltv_bao_gong);
-        baoGong.setText(countList.get(0).get("payTypeName")+": "+countList.get(0).get("workCount")+" 天");
+        baoGong.setText(countList.get(0).get("payTypeName")+": "+countList.get(0).get("workCount")+" 小时");
         TextView dianGong=(TextView)findViewById(R.id.ltv_dian_gong);
-        dianGong.setText(countList.get(1).get("payTypeName")+": "+countList.get(1).get("workCount")+" 天");
+        dianGong.setText(countList.get(1).get("payTypeName")+": "+countList.get(1).get("workCount")+" 小时");
     }
     public void preMonth(View v){
         mAdapter.lessMonth();

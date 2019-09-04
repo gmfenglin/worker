@@ -81,8 +81,8 @@ public class WorkRecordActivity extends AppCompatActivity {
         workDayView.setText(today);
         workRecord.setTimeType(timeType);
 
-        timeType.setId(3);
-        timeType.setName("休息");
+        timeType.setId(2);
+        timeType.setName("时段");
         panels[0]=findViewById(R.id.fll_one);
         panels[1]=findViewById(R.id.fill_part);
         panels[2]=findViewById(R.id.fill_0);

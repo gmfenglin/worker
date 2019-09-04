@@ -129,12 +129,13 @@ public class CalendarAdapter extends BaseAdapter {
             switch (Integer.parseInt(map.get("time_type_id").toString())){
               case 1:
               {
-                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.GREEN);
+                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.YELLOW);
                 break;
               }
               case 2:
               {
-                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.YELLOW);
+                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.GREEN);
+
                 break;
               }
               case 3:
@@ -157,12 +158,13 @@ public class CalendarAdapter extends BaseAdapter {
             switch (Integer.parseInt(map.get("time_type_id").toString())){
               case 1:
               {
-                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.GREEN);
+                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.YELLOW);
                 break;
               }
               case 2:
               {
-                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.YELLOW);
+
+                myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(Color.GREEN);
                 break;
               }
               case 3:

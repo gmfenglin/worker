@@ -163,8 +163,8 @@ private class AccountAdatper extends BaseAdapter{
         /*设置TextView显示的内容，即我们存放在动态数组中的数据*/
         holder.title.setText(data.get(position).get("name").toString());
         holder.text.setText(data.get(position).get("yearMonth").toString());
-        holder.textBG.setText(data.get(position).get("payTypeName").toString()+"   "+data.get(position).get("workCount").toString()+" 天 ");
-        holder.textDG.setText(data.get(position).get("spayTypeName").toString()+"    "+data.get(position).get("sworkCount").toString()+" 天");
+        holder.textBG.setText(data.get(position).get("payTypeName").toString()+"   "+data.get(position).get("workCount").toString()+" 小时 ");
+        holder.textDG.setText(data.get(position).get("spayTypeName").toString()+"    "+data.get(position).get("sworkCount").toString()+" 小时");
         if("yes".equals(data.get(position).get("last"))){
             holder.title.setTextColor(Color.RED);
         }else{
