@@ -189,11 +189,10 @@ public class DBhelper extends SQLiteOpenHelper {
     }
     public List<Map<String,Object>> searchRecordByAccount(String yearMonth){
         List<Map<String,Object>> result=new ArrayList<>();
-       Cursor cursor= getReadableDatabase().rawQuery("select account.id,account.name,payType.name as payTypeName,ifnull(sum(work_count),0) as workCount from " +
+      Cursor cursor= getReadableDatabase().rawQuery("select account.id,account.name,payType.name as payTypeName,ifnull(sum(work_count),0) as workCount from " +
                                 "account left join payType  left join workRecord left join workTime " +
                                "on workRecord.id= workTime.record_id and account.id=workRecord.account_id and payType.id=workTime.pay_type_id " +
                                "and work_day like  ? where account.status =0 group by account.name,payTypeName ",new String[]{yearMonth+"%"});
-     //   Cursor cursor= getReadableDatabase().rawQuery("select * from workTime",null);
         if(cursor.moveToFirst()){
             do{
                 Map<String,Object> map=new HashMap<>();
@@ -201,21 +200,63 @@ public class DBhelper extends SQLiteOpenHelper {
                 for(String key:keys){
                     map.put(key,cursor.getString(cursor.getColumnIndex(key)));
                 }
+                System.out.println(map);
                 result.add(map);
 
             }while (cursor.moveToNext());
 
         }
-        SimpleLogger.getInstance().log(result.toString());
+
         return result;
     }
 
-    public boolean isExistsRecordByDay(String day){
-        Cursor cursor=getReadableDatabase().rawQuery("select * from workRecord where work_day=?",new String[]{day});
+    public boolean isExistsRecordByDay(String day,String id){
+        Cursor cursor=getReadableDatabase().rawQuery("select * from workRecord where work_day=? and account_id=?",new String[]{day,id});
         if(cursor.moveToFirst()){
             return true;
         }
         return false;
+    }
+    public List<Map<String,Object>> searchByAccountAndMonthCount(String yearMonth,String id){
+        List<Map<String,Object>> result=new ArrayList<>();
+        Cursor cursor= getReadableDatabase().rawQuery("select account.id,account.name,payType.name as payTypeName,ifnull(sum(work_count),0) as workCount from " +
+                "account left join payType  left join workRecord left join workTime " +
+                "on workRecord.id= workTime.record_id and account.id=workRecord.account_id and payType.id=workTime.pay_type_id " +
+                "and work_day like  ? where account.status =0 and account.id=? group by account.name,payTypeName ",new String[]{yearMonth+"%",id});
+        if(cursor.moveToFirst()){
+            do{
+                Map<String,Object> map=new HashMap<>();
+                String [] keys=cursor.getColumnNames();
+                for(String key:keys){
+                    map.put(key,cursor.getString(cursor.getColumnIndex(key)));
+                }
+                System.out.println(map);
+                result.add(map);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        return result;
+    }
+    public List<Map<String,Object>> searchByAccountAndMonth(String yearMonth,String id){
+        Cursor cursor=getReadableDatabase().rawQuery("select * from workRecord where work_day like ? and account_id=?",new String[]{yearMonth+"%",id});
+        List<Map<String,Object>> result=new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                Map<String,Object> map=new HashMap<>();
+                String [] keys=cursor.getColumnNames();
+                for(String key:keys){
+                    map.put(key,cursor.getString(cursor.getColumnIndex(key)));
+                }
+                System.out.println(map);
+                result.add(map);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        return result;
     }
     public DBhelper(Context context ) {
         super(context, DB_NAME, null, VERSION);

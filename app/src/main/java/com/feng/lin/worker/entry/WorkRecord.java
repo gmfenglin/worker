@@ -10,6 +10,8 @@ public class WorkRecord {
     private TimeType timeType;
     private List<WorkTime> workTimeList;
 
+
+
     public List<WorkTime> getWorkTimeList() {
         return workTimeList;
     }

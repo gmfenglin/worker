@@ -122,7 +122,7 @@ public class ApiService {
     public int recordWork(WorkRecord workRecord){
         int flag=0;
         try{
-            if(dao.isExistsRecordByDay(workRecord.getWorkDay())){
+            if(dao.isExistsRecordByDay(workRecord.getWorkDay(),workRecord.getAccount().getId()+"")){
                return -1;
             }
             if( dao.recordWork(workRecord)>0){
@@ -134,5 +134,13 @@ public class ApiService {
         }
             return flag;
 
+    }
+    public Map<String, List<Map<String,Object>>> searchByAccountAndMonth(String yearMonth,String id){
+        List<Map<String,Object>> monthList=dao.searchByAccountAndMonth(yearMonth,id);
+        List<Map<String,Object>> countList=dao.searchByAccountAndMonthCount(yearMonth,id);
+        Map<String, List<Map<String,Object>>> result=new HashMap<>();
+        result.put("monthList",monthList);
+        result.put("countList",countList);
+        return result;
     }
 }

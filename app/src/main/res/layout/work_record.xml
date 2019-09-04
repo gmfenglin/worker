@@ -99,14 +99,14 @@
             android:text="工地："
             android:layout_width="wrap_content"
             android:gravity="center_vertical"
-            android:layout_height="36dp" />
+            android:layout_height="48dp" />
         <AutoCompleteTextView
             android:id="@+id/fr_actv_land"
             android:layout_toRightOf="@id/fr_tv_label_land"
             android:layout_width="match_parent"
             android:completionThreshold="1"
             android:singleLine="true"
-            android:layout_height="36dp" />
+            android:layout_height="48dp" />
         <TextView
             android:layout_below="@id/fr_tv_label_land"
             android:id="@+id/fr_tv_label_work_type"
@@ -168,7 +168,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_toRightOf="@id/s_rt_label_count"
-                android:inputType="number"
+                android:inputType="numberDecimal"
                 android:id="@+id/s_ret_count"
                 android:layout_height="36dp" />
             <TextView
@@ -204,7 +204,7 @@
                 android:id="@+id/s_tv_label_land"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp" />
+                android:layout_height="48dp" />
             <AutoCompleteTextView
                 android:id="@+id/s_ractv_land"
                 android:layout_toRightOf="@id/s_tv_label_land"
@@ -212,7 +212,7 @@
                 android:layout_width="match_parent"
                 android:completionThreshold="1"
                 android:singleLine="true"
-                android:layout_height="36dp" />
+                android:layout_height="48dp" />
         </RelativeLayout>
     </LinearLayout>
         <LinearLayout
@@ -241,7 +241,7 @@
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/x_rt_label_count"
                     android:id="@+id/x_ret_count"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_height="36dp" />
                 <TextView
                     android:text="工资类型："
@@ -276,7 +276,7 @@
                     android:id="@+id/x_tv_label_land"
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp" />
+                    android:layout_height="48dp" />
                 <AutoCompleteTextView
                     android:id="@+id/x_ractv_land"
                     android:layout_toRightOf="@id/x_tv_label_land"
@@ -284,7 +284,7 @@
                     android:layout_width="match_parent"
                     android:completionThreshold="1"
                     android:singleLine="true"
-                    android:layout_height="36dp" />
+                    android:layout_height="48dp" />
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
@@ -313,7 +313,7 @@
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/w_rt_label_count"
                     android:id="@+id/w_ret_count"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:layout_height="36dp" />
                 <TextView
                     android:text="工资类型："
@@ -348,7 +348,7 @@
                     android:id="@+id/w_tv_label_land"
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp" />
+                    android:layout_height="48dp" />
                 <AutoCompleteTextView
                     android:id="@+id/w_ractv_land"
                     android:layout_toRightOf="@id/w_tv_label_land"
@@ -356,7 +356,7 @@
                     android:layout_width="match_parent"
                     android:completionThreshold="1"
                     android:singleLine="true"
-                    android:layout_height="36dp" />
+                    android:layout_height="48dp" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

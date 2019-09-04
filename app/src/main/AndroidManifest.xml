@@ -22,6 +22,7 @@
         <activity android:name=".ui.AccountActivity"  android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.LandActivity"  android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.WorkRecordActivity"  android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".ui.MonthActivity"  android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

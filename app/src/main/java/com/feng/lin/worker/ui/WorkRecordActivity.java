@@ -258,7 +258,19 @@ public class WorkRecordActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //...To-do
-                    String day=    datePicker.getYear()+"-"+(datePicker.getMonth()+1)+"-"+datePicker.getDayOfMonth();
+                        int month=(datePicker.getMonth()+1);
+                        String day=    ""+datePicker.getYear();
+                        if(month<10){
+                            day=day+"-0"+month;
+                        }else{
+                            day=day+"-"+month;
+                        }
+                        int n=datePicker.getDayOfMonth();
+                        if(n<10){
+                            day=day+"-0"+n;
+                        }else{
+                            day=day+"-"+n;
+                        }
                         workDayView.setText(day);
                     }
                 });
@@ -293,7 +305,7 @@ public class WorkRecordActivity extends AppCompatActivity {
                 RadioGroup payTypeRG=(RadioGroup) findViewById(R.id.rg_one_pay_type);
                 int checkedId=  payTypeRG.getCheckedRadioButtonId();
                 PayType payType=new PayType();
-                SimpleLogger.getInstance().log(checkedId+":");
+
                 if(checkedId==R.id.rg_one_rb_bg){
                     payType.setId(1);
                     payType.setName("包工");
@@ -315,6 +327,7 @@ public class WorkRecordActivity extends AppCompatActivity {
                 workTime.setWorkCount(1);
                 workTime.setWorkRecord(workRecord);
                 workTimeList.add(workTime);
+
                 int flag=ApiService.getInstance().recordWork(workRecord);
                 if(flag==1){
                     Toast.makeText(instance,"打卡成功", Toast.LENGTH_SHORT).show();
@@ -460,6 +473,7 @@ public class WorkRecordActivity extends AppCompatActivity {
                     Toast.makeText(instance,"请选择（上午/下午/晚上）", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 int flagI=ApiService.getInstance().recordWork(workRecord);
                 if(flagI==1){
                     Toast.makeText(instance,"打卡成功", Toast.LENGTH_SHORT).show();
@@ -470,6 +484,7 @@ public class WorkRecordActivity extends AppCompatActivity {
                 }
                 break;}
             case 3:{
+
                 int flagI=ApiService.getInstance().recordWork(workRecord);
                 if(flagI==1){
                     Toast.makeText(instance,"打卡成功", Toast.LENGTH_SHORT).show();

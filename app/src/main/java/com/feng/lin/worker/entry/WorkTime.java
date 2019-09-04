@@ -10,6 +10,8 @@ public class WorkTime {
     private double workCount;
     private Land land;
 
+
+
     public WorkRecord getWorkRecord() {
         return workRecord;
     }

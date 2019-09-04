@@ -12,14 +12,45 @@
     android:textAlignment="center"
     android:background="@drawable/border_rigght"
     android:layout_height="match_parent" />
-   <TextView
-       android:id="@+id/tv_records"
-       android:layout_width="0dp"
-       android:layout_weight="1"
-       android:paddingLeft="8dp"
-       android:gravity="center_vertical"
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
 
-       android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:id="@+id/tv_records_year_month"
+            android:text="2019-09-04"
+            android:layout_width="wrap_content"
+
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+
+            android:layout_height="24dp" />
+        <TextView
+            android:id="@+id/tv_records_bao_gong"
+            android:layout_width="wrap_content"
+            android:text="包工：1 天"
+
+            android:paddingLeft="8dp"
+            android:layout_below="@+id/tv_records_year_month"
+            android:gravity="center_vertical"
+
+            android:layout_height="24dp" />
+        <TextView
+            android:id="@+id/tv_records_dian_gong"
+            android:layout_below="@+id/tv_records_bao_gong"
+            android:layout_width="wrap_content"
+            android:text="点工：2天"
+
+            android:paddingLeft="8dp"
+            android:gravity="center_vertical"
+
+            android:layout_height="24dp" />
+    </RelativeLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:id="@+id/btn_record"

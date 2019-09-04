@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_bottom"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_height="48dp">
+        <ImageButton
+            android:layout_width="36dp"
+            android:onClick="back"
+            android:background="@drawable/back_select"
+            android:layout_alignParentStart="true"
+            android:layout_height="36dp" />
+        <TextView
+            android:text="月记录"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_bottom"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_height="48dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:text="上一月"
+            android:onClick="preMonth"
+            android:background="@drawable/btn_select"
+            android:layout_alignParentStart="true"
+            android:layout_height="36dp" />
+        <TextView
+            android:text="2019-09"
+            android:id="@+id/rtv_month"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:text="下一月"
+            android:onClick="nextMoth"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/btn_select"
+            android:layout_height="36dp" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/border_bottom"
+        android:orientation="horizontal"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:layout_height="48dp"
+        >
+        <TextView
+            android:id="@+id/ltv_bao_gong"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="包工：1 天"
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+        <TextView
+            android:id="@+id/ltv_dian_gong"
+            android:text="点工：1 天"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_height="36dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期日"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="36dp" />
+        <TextView
+        android:layout_width="0dp"
+        android:text="星期一"
+        android:layout_weight="1" android:gravity="center"
+        android:layout_height="36dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期二"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期三"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期四"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期五"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:layout_height="36dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:text="星期六"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="36dp" />
+    </LinearLayout>
+    <GridView
+        android:layout_width="match_parent"
+        android:id="@+id/gl_month"
+        android:clickable="true"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:clipChildren="true"
+        android:listSelector="@null"
+        android:numColumns="7"
+        android:padding="1dp"
+        android:layout_margin="5dp"
+        android:stretchMode="columnWidth"
+        android:layout_height="match_parent"></GridView>
+</LinearLayout>

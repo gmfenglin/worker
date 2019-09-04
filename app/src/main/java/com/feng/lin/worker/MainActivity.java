@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.feng.lin.worker.service.ApiService;
 import com.feng.lin.worker.ui.AccountActivity;
 import com.feng.lin.worker.ui.LandActivity;
+import com.feng.lin.worker.ui.MonthActivity;
 import com.feng.lin.worker.ui.WorkRecordActivity;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         }
         accountAdatper.notifyDataSetChanged();
     }
+
     public void showMenu(View v){
         showAlertDialog();
     }
@@ -87,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
     public final class ViewHolder {
         public TextView title;
         public TextView text;
+        public TextView textBG;
+        public TextView textDG;
         public Button bt;
     }
 private class AccountAdatper extends BaseAdapter{
@@ -121,7 +125,9 @@ private class AccountAdatper extends BaseAdapter{
             holder = new ViewHolder();
             /*得到各个控件的对象*/
             holder.title = (TextView) convertView.findViewById(R.id.tv_account_name);
-            holder.text = (TextView) convertView.findViewById(R.id.tv_records);
+            holder.text = (TextView) convertView.findViewById(R.id.tv_records_year_month);
+            holder.textBG = (TextView) convertView.findViewById(R.id.tv_records_bao_gong);
+            holder.textDG = (TextView) convertView.findViewById(R.id.tv_records_dian_gong);
             holder.bt = (Button) convertView.findViewById(R.id.btn_record); // to ItemButton
 
             convertView.setTag(holder); //绑定ViewHolder对象
@@ -129,11 +135,19 @@ private class AccountAdatper extends BaseAdapter{
         else {
             holder = (ViewHolder) convertView.getTag(); //取出ViewHolder对象
         }
-
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(instance, MonthActivity.class);
+                intent.putExtra("accountId",data.get(position).get("id").toString());
+                instance.startActivity(intent);
+            }
+        });
         /*设置TextView显示的内容，即我们存放在动态数组中的数据*/
         holder.title.setText(data.get(position).get("name").toString());
-
-        holder.text.setText(data.get(position).get("yearMonth").toString()+"   "+data.get(position).get("payTypeName").toString()+"   "+data.get(position).get("workCount").toString()+" 天 "+data.get(position).get("spayTypeName").toString()+"    "+data.get(position).get("sworkCount").toString()+" 天");
+        holder.text.setText(data.get(position).get("yearMonth").toString());
+        holder.textBG.setText(data.get(position).get("payTypeName").toString()+"   "+data.get(position).get("workCount").toString()+" 天 ");
+        holder.textDG.setText(data.get(position).get("spayTypeName").toString()+"    "+data.get(position).get("sworkCount").toString()+" 天");
         /*为Button添加点击事件*/
         holder.bt.setOnClickListener(new View.OnClickListener() {
             @Override
