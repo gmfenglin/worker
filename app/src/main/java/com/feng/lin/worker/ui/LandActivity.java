@@ -45,6 +45,9 @@ public class LandActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance=this;
         setContentView(R.layout.base_data);
+        String title=  getIntent().getStringExtra("title");
+        TextView tvTitle= (TextView) findViewById(R.id.tv_base_data_title);
+        tvTitle.setText(title);
         lvAccount=this.findViewById(R.id.base_data_list);
         landAdatper=new LandAdatper(this,landListResult);
         lvAccount.setAdapter(landAdatper);

@@ -43,6 +43,9 @@ public class MonthActivity extends AppCompatActivity {
         instance=this;
         Intent intent=getIntent();
          accountId= intent.getStringExtra("accountId");
+         String accountName=  intent.getStringExtra("accountName");
+        TextView tvAccountName= (TextView) findViewById(R.id.tv_month_account_name);
+        tvAccountName.setText(accountName);
         Calendar cal = Calendar.getInstance();
        int year= cal.get(Calendar.YEAR);
        int month=cal.get(Calendar.MONTH)+1;

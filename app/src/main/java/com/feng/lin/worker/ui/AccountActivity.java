@@ -47,6 +47,9 @@ public class AccountActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance=this;
         setContentView(R.layout.base_data);
+        String title=  getIntent().getStringExtra("title");
+        TextView tvTitle= (TextView) findViewById(R.id.tv_base_data_title);
+        tvTitle.setText(title);
         lvAccount=this.findViewById(R.id.base_data_list);
         accountAdatper=new AccountAdatper(this,accountListResult);
         lvAccount.setAdapter(accountAdatper);

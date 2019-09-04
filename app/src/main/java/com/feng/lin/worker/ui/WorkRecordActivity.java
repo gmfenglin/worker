@@ -59,6 +59,7 @@ public class WorkRecordActivity extends AppCompatActivity {
     private Map<String,Integer> onemap=new HashMap<>();
 
 
+
     private CheckBox [] timeZoneCheckBoxs=new CheckBox[3];
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +68,9 @@ public class WorkRecordActivity extends AppCompatActivity {
         instance=this;
         Intent intent=getIntent();
        String accountId= intent.getStringExtra("accountId");
+        String accountName= intent.getStringExtra("accountName");
+       TextView tvAccountName=(TextView) findViewById(R.id.tv_record_accountName);
+        tvAccountName.setText(accountName);
         Account account=new Account();
         account.setId(Integer.valueOf(accountId));
 

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] menuItems = new String[]{"工人管理","工地管理",};
    private List<Map<String,Object>> dataSearch=new ArrayList<>();
     private AccountAdatper accountAdatper;
+    private String currentAccountId;
 
     @Override
     protected void onResume() {
@@ -60,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         List<Map<String,Object>> dataResult= ApiService.getInstance().searchAccounts();
         for (Map<String,Object> map :dataResult){
+            if(map.get("id").equals(currentAccountId)){
+                map.put("last","yes");
+            }
             dataSearch.add(map);
         }
         accountAdatper.notifyDataSetChanged();
@@ -77,9 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if(i==0){
                     Intent intent=new Intent(instance, AccountActivity.class);
+                    intent.putExtra("title",menuItems[i]);
                     instance.startActivity(intent);
                 }else{
                     Intent intent=new Intent(instance, LandActivity.class);
+                    intent.putExtra("title",menuItems[i]);
                     instance.startActivity(intent);
                 }
             }
@@ -95,10 +102,12 @@ public class MainActivity extends AppCompatActivity {
     }
 private class AccountAdatper extends BaseAdapter{
     private LayoutInflater mInflater;
+    private  AccountAdatper instanceAdapter;
     private List<Map<String,Object>> data;
         public AccountAdatper(Context context,List<Map<String,Object>> data){
             this.mInflater = LayoutInflater.from(context);
             this.data=data;
+            instanceAdapter=this;
         }
     @Override
     public int getCount() {
@@ -130,6 +139,7 @@ private class AccountAdatper extends BaseAdapter{
             holder.textDG = (TextView) convertView.findViewById(R.id.tv_records_dian_gong);
             holder.bt = (Button) convertView.findViewById(R.id.btn_record); // to ItemButton
 
+
             convertView.setTag(holder); //绑定ViewHolder对象
         }
         else {
@@ -138,8 +148,15 @@ private class AccountAdatper extends BaseAdapter{
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentAccountId=data.get(position).get("id").toString();
+                for (Map<String,Object> map:data){
+                    map.put("last","no");
+                }
+                data.get(position).put("last","yes");
+                instanceAdapter.notifyDataSetChanged();
                 Intent intent=new Intent(instance, MonthActivity.class);
                 intent.putExtra("accountId",data.get(position).get("id").toString());
+                intent.putExtra("accountName",data.get(position).get("name").toString());
                 instance.startActivity(intent);
             }
         });
@@ -148,12 +165,24 @@ private class AccountAdatper extends BaseAdapter{
         holder.text.setText(data.get(position).get("yearMonth").toString());
         holder.textBG.setText(data.get(position).get("payTypeName").toString()+"   "+data.get(position).get("workCount").toString()+" 天 ");
         holder.textDG.setText(data.get(position).get("spayTypeName").toString()+"    "+data.get(position).get("sworkCount").toString()+" 天");
+        if("yes".equals(data.get(position).get("last"))){
+            holder.title.setTextColor(Color.RED);
+        }else{
+            holder.title.setTextColor(Color.BLACK);
+        }
         /*为Button添加点击事件*/
         holder.bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                currentAccountId=data.get(position).get("id").toString();
+                for (Map<String,Object> map:data){
+                    map.put("last","no");
+                }
+                data.get(position).put("last","yes");
+                instanceAdapter.notifyDataSetChanged();
                 Intent intent=new Intent(instance, WorkRecordActivity.class);
                 intent.putExtra("accountId",data.get(position).get("id").toString());
+                intent.putExtra("accountName",data.get(position).get("name").toString());
                 instance.startActivity(intent);
             }
         });

@@ -17,11 +17,12 @@
         android:layout_centerInParent="true"
         android:layout_height="match_parent" />
     <ImageButton
-        android:layout_width="48dp"
+        android:layout_width="24dp"
         android:layout_alignParentEnd="true"
         android:onClick="showMenu"
+        android:layout_centerVertical="true"
         android:background="@drawable/menu_select"
-        android:layout_height="48dp" />
+        android:layout_height="24dp" />
 </RelativeLayout>
 <ListView
     android:id="@+id/account_list"

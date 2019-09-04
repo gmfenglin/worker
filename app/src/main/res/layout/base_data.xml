@@ -11,10 +11,11 @@
         android:paddingBottom="6dp"
         android:layout_height="48dp">
         <ImageButton
-            android:layout_width="36dp"
+            android:layout_width="24dp"
             android:onClick="back"
             android:background="@drawable/back_select"
-            android:layout_height="36dp" />
+            android:layout_centerVertical="true"
+            android:layout_height="24dp" />
        <AutoCompleteTextView
            android:layout_width="0dp"
            android:layout_weight="1"
@@ -24,16 +25,24 @@
            android:singleLine="true"
            android:layout_height="match_parent" />
         <ImageButton
-            android:layout_width="36dp"
+            android:layout_width="24dp"
             android:onClick="search"
             android:background="@drawable/search_select"
-            android:layout_height="36dp" />
+            android:layout_centerVertical="true"
+            android:layout_height="24dp" />
         <ImageButton
-            android:layout_width="36dp"
+            android:layout_width="24dp"
             android:onClick="showAdd"
             android:background="@drawable/add_select"
-            android:layout_height="36dp" />
+            android:layout_centerVertical="true"
+            android:layout_height="24dp" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_base_data_title"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:background="@drawable/border_bottom"
+        android:layout_height="36dp" />
     <ListView
         android:id="@+id/base_data_list"
         android:layout_width="match_parent"
