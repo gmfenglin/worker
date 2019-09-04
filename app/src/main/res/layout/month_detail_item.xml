@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tv_month_detail_item_time_type"
+        android:background="@drawable/border_bottom"
+        android:visibility="gone"
+        android:layout_height="36dp" />
+    <TextView
+    android:layout_width="match_parent"
+    android:id="@+id/tv_month_detail_item_time_zone"
+        android:background="@drawable/border_bottom"
+    android:layout_height="36dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tv_month_detail_item_time_land"
+        android:background="@drawable/border_bottom"
+
+        android:layout_height="36dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tv_month_detail_item_pay_type"
+        android:background="@drawable/border_bottom"
+        android:layout_height="36dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/tv_month_detail_item_work_count"
+        android:background="@drawable/border_bottom"
+        android:layout_height="36dp" />
+</LinearLayout>

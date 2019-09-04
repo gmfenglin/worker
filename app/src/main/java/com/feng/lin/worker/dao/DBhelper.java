@@ -49,28 +49,42 @@ public class DBhelper extends SQLiteOpenHelper {
         db.execSQL("insert into timeZone (id,name) values(4,'全天');");
        }
     public long recordWork(WorkRecord workRecord){
-        ContentValues contentValues=new ContentValues();
-        contentValues.put("id",workRecord.getId());
-        contentValues.put("account_id",workRecord.getAccount().getId());
-        contentValues.put("work_day",workRecord.getWorkDay());
-        contentValues.put("time_type_id",workRecord.getTimeType().getId());
+        SQLiteDatabase db=getWritableDatabase();
+        long result=0;
+        try{
+            db.beginTransaction();
+            db.delete("workTime","record_id=(select id from workRecord where work_day=? and account_id=?)",new String[]{workRecord.getWorkDay(),workRecord.getAccount().getId()+""});
+            db.delete("workRecord","work_day=? and account_id=?",new String[]{workRecord.getWorkDay(),workRecord.getAccount().getId()+""});
+            ContentValues contentValues=new ContentValues();
 
-        if(workRecord.getWorkTimeList()!=null && workRecord.getWorkTimeList().size()>0){
-            List<WorkTime> workTimeList= workRecord.getWorkTimeList();
-            for (WorkTime workTime:workTimeList){
-                ContentValues contentWorkTimeValues=new ContentValues();
-                contentWorkTimeValues.put("pay_type_id",workTime.getPayType().getId());
-                contentWorkTimeValues.put("record_id",workTime.getWorkRecord().getId());
-                contentWorkTimeValues.put("land_id",workTime.getLand().getId());
-                contentWorkTimeValues.put("time_zone_id",workTime.getTimeZone().getId());
-                contentWorkTimeValues.put("work_count",workTime.getWorkCount());
-                getWritableDatabase().insert("workTime",null,contentWorkTimeValues);
+            contentValues.put("id",workRecord.getId());
+            contentValues.put("account_id",workRecord.getAccount().getId());
+            contentValues.put("work_day",workRecord.getWorkDay());
+            contentValues.put("time_type_id",workRecord.getTimeType().getId());
+
+            if(workRecord.getWorkTimeList()!=null && workRecord.getWorkTimeList().size()>0){
+                List<WorkTime> workTimeList= workRecord.getWorkTimeList();
+                for (WorkTime workTime:workTimeList){
+                    ContentValues contentWorkTimeValues=new ContentValues();
+                    contentWorkTimeValues.put("pay_type_id",workTime.getPayType().getId());
+                    contentWorkTimeValues.put("record_id",workTime.getWorkRecord().getId());
+                    contentWorkTimeValues.put("land_id",workTime.getLand().getId());
+                    contentWorkTimeValues.put("time_zone_id",workTime.getTimeZone().getId());
+                    contentWorkTimeValues.put("work_count",workTime.getWorkCount());
+                   db.insert("workTime",null,contentWorkTimeValues);
+                }
+
             }
-
+            result= db.insert("workRecord",null,contentValues);
+            db.setTransactionSuccessful();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            db.endTransaction();
+            return result;
         }
 
 
-        return getWritableDatabase().insert("workRecord",null,contentValues);
     }
     public long saveAccount(Account account){
         ContentValues contentValues=new ContentValues();
@@ -102,9 +116,9 @@ public class DBhelper extends SQLiteOpenHelper {
         SimpleLogger.getInstance().log(hitList.size()+":hitList");
         return hitList;
     }
-    public Map<String,Integer> hitSearchEnableLand(String hit){
+    public Map<String,Integer> hitSearchEnableLand(){
         Map<String,Integer> hitMap=new HashMap<>();
-        Cursor cursor=getReadableDatabase().rawQuery("select * from land where status=0 and name like ? limit 0,5",new String[]{hit+"%"});
+        Cursor cursor=getReadableDatabase().rawQuery("select * from land where status=0 ",null);
         if(cursor.moveToFirst()){
             do{
 
@@ -114,7 +128,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
             }while (cursor.moveToNext());
         }
-
+SimpleLogger.getInstance().log(hitMap.toString()+":hitMap");
         return hitMap;
     }
     public List<Land> searchLand(String name){
@@ -241,6 +255,25 @@ public class DBhelper extends SQLiteOpenHelper {
     }
     public List<Map<String,Object>> searchByAccountAndMonth(String yearMonth,String id){
         Cursor cursor=getReadableDatabase().rawQuery("select * from workRecord where work_day like ? and account_id=?",new String[]{yearMonth+"%",id});
+        List<Map<String,Object>> result=new ArrayList<>();
+        if(cursor.moveToFirst()){
+            do{
+                Map<String,Object> map=new HashMap<>();
+                String [] keys=cursor.getColumnNames();
+                for(String key:keys){
+                    map.put(key,cursor.getString(cursor.getColumnIndex(key)));
+                }
+                System.out.println(map);
+                result.add(map);
+
+            }while (cursor.moveToNext());
+
+        }
+
+        return result;
+    }
+    public List<Map<String,Object>> searchDay(String day,String id){
+        Cursor cursor=getReadableDatabase().rawQuery("select timeType.name as timeTypeName,workRecord.work_day as workDay,payType.name as payTypeName,work_count,land.name as landName,timeZone.name as timeZoneName from workRecord inner join timeType left join workTime left join land left join  timeZone left join payType on workRecord.id=workTime.record_id and workRecord.time_type_id=timeType.id where workTime.pay_type_id = payType.id and workTime.land_id=land.id and timeZone.id=workTime.time_zone_id  and work_day = ? and account_id=?",new String[]{day,id});
         List<Map<String,Object>> result=new ArrayList<>();
         if(cursor.moveToFirst()){
             do{

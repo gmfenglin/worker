@@ -75,6 +75,13 @@
             android:gravity="center_vertical"
             android:layout_height="36dp" />
     </LinearLayout>
+    <TextView
+        android:text="红色（未打卡），绿色（全天），黄色（时段），蓝色（休息），白色（当天）"
+        android:layout_width="match_parent"
+        android:textSize="11sp"
+        android:gravity="center_vertical"
+        android:background="@drawable/border_bottom"
+        android:layout_height="36dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="36dp">

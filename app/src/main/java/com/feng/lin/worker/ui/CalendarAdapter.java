@@ -97,6 +97,7 @@ public class CalendarAdapter extends BaseAdapter {
       myViewHolder = new ViewHolder();
 
       myViewHolder.mIdTvItemSelectTimeDay=convertView.findViewById(R.id.id_tv_item_select_time_day);
+      myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(0);
       convertView.setTag(myViewHolder);
     } else {
       myViewHolder = (ViewHolder) convertView.getTag();
@@ -112,7 +113,7 @@ public class CalendarAdapter extends BaseAdapter {
       myViewHolder.mIdTvItemSelectTimeDay.setTag(false);// 当月字体设黑
     }
 
-    myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(0);
+
     if(!dFlag&&Integer.parseInt(dayNumber[position])==1&&monthDayList.size()==0){
       dFlag=true;
     }
@@ -196,6 +197,8 @@ public class CalendarAdapter extends BaseAdapter {
 
 
       }
+    }else{
+      myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(0);
     }
 
  

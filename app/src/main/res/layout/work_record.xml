@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:gravity="center_vertical"
             android:layout_height="48dp" />
-        <AutoCompleteTextView
+        <Spinner
             android:id="@+id/fr_actv_land"
             android:layout_toRightOf="@id/fr_tv_label_land"
             android:layout_width="match_parent"
@@ -205,7 +205,7 @@
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp" />
-            <AutoCompleteTextView
+            <Spinner
                 android:id="@+id/s_ractv_land"
                 android:layout_toRightOf="@id/s_tv_label_land"
                 android:layout_below="@+id/s_rg_pay_type"
@@ -277,7 +277,7 @@
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp" />
-                <AutoCompleteTextView
+                <Spinner
                     android:id="@+id/x_ractv_land"
                     android:layout_toRightOf="@id/x_tv_label_land"
                     android:layout_below="@+id/x_rg_pay_type"
@@ -349,7 +349,7 @@
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp" />
-                <AutoCompleteTextView
+                <Spinner
                     android:id="@+id/w_ractv_land"
                     android:layout_toRightOf="@id/w_tv_label_land"
                     android:layout_below="@+id/w_rg_pay_type"

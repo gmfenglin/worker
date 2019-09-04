@@ -116,15 +116,13 @@ public class ApiService {
             return flag;
         }
     }
-    public  Map<String,Integer> hitSearchEnableLand(String hit){
-        return dao.hitSearchEnableLand( hit);
+    public  Map<String,Integer> hitSearchEnableLand(){
+        return dao.hitSearchEnableLand( );
     }
     public int recordWork(WorkRecord workRecord){
         int flag=0;
         try{
-            if(dao.isExistsRecordByDay(workRecord.getWorkDay(),workRecord.getAccount().getId()+"")){
-               return -1;
-            }
+
             if( dao.recordWork(workRecord)>0){
                 flag=1;
             }
@@ -142,5 +140,10 @@ public class ApiService {
         result.put("monthList",monthList);
         result.put("countList",countList);
         return result;
+    }
+    public List<Map<String,Object>> searchDay(String day,String id){
+
+        return dao.searchDay(day,id);
+
     }
 }

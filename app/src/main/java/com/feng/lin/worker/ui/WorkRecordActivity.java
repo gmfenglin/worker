@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,22 +47,17 @@ public class WorkRecordActivity extends AppCompatActivity {
     private TimeType timeType=new TimeType();
     private TextView workDayView;
     private View [] panels=new View[3];
-    private AutoCompleteTextView oneACTV;
+    private Spinner oneACTV;
     private ArrayAdapter<String> oneAdapter;
     private List<String> oneList=new ArrayList<>();
-    private AutoCompleteTextView part_SW_ACTV;
-    private ArrayAdapter<String> sadapter;
+    private Spinner part_SW_ACTV;
     private List<String> sList=new ArrayList<>();
-    private AutoCompleteTextView part_XW_ACTV;
-    private ArrayAdapter<String> xadapter;
+    private Spinner part_XW_ACTV;
     private List<String> xList=new ArrayList<>();
-    private AutoCompleteTextView part_WS_ACTV;
-    private ArrayAdapter<String> wadapter;
+    private Spinner part_WS_ACTV;
     private List<String> wList=new ArrayList<>();
     private Map<String,Integer> onemap=new HashMap<>();
-    private Map<String,Integer> smap=new HashMap<>();;
-    private Map<String,Integer> xmap=new HashMap<>();;
-    private Map<String,Integer> wmap=new HashMap<>();;
+
 
     private CheckBox [] timeZoneCheckBoxs=new CheckBox[3];
     @Override
@@ -120,133 +116,34 @@ public class WorkRecordActivity extends AppCompatActivity {
 
             }
         });
-        oneACTV=(AutoCompleteTextView)findViewById(R.id.fr_actv_land);
+        oneACTV=(Spinner)findViewById(R.id.fr_actv_land);
         oneAdapter= new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, oneList);
         oneACTV.setAdapter(oneAdapter);
-        oneACTV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textViewSearch=(TextView) view;
-                oneACTV.setText(textViewSearch.getText());
-            }
-        });
-        oneACTV.addTextChangedListener(new TextWatcher(){
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                hitLand(s.toString(),oneList,oneAdapter,onemap);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-        part_SW_ACTV=(AutoCompleteTextView)findViewById(R.id.s_ractv_land);
-        sadapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, sList);
-        part_SW_ACTV.setAdapter(sadapter);
-        part_SW_ACTV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textViewSearch=(TextView) view;
-                part_SW_ACTV.setText(textViewSearch.getText());
-            }
-        });
-        part_SW_ACTV.addTextChangedListener(new TextWatcher(){
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                hitLand(s.toString(),sList,sadapter,smap);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        part_XW_ACTV=(AutoCompleteTextView)findViewById(R.id.x_ractv_land);
-        xadapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, xList);
-        part_XW_ACTV.setAdapter(xadapter);
-        part_XW_ACTV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textViewSearch=(TextView) view;
-                part_XW_ACTV.setText(textViewSearch.getText());
-            }
-        });
-        part_XW_ACTV.addTextChangedListener(new TextWatcher(){
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                hitLand(s.toString(),xList,xadapter,xmap);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-        part_WS_ACTV=(AutoCompleteTextView)findViewById(R.id.w_ractv_land);
-        wadapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, wList);
-        part_WS_ACTV.setAdapter(wadapter);
-        part_WS_ACTV.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textViewSearch=(TextView) view;
-                part_WS_ACTV.setText(textViewSearch.getText());
-            }
-        });
-        part_WS_ACTV.addTextChangedListener(new TextWatcher(){
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                hitLand(s.toString(),wList,wadapter,wmap);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        part_SW_ACTV=(Spinner)findViewById(R.id.s_ractv_land);
+        part_SW_ACTV.setAdapter(oneAdapter);
+        part_XW_ACTV=(Spinner)findViewById(R.id.x_ractv_land);
+        part_XW_ACTV.setAdapter(oneAdapter);
+        part_WS_ACTV=(Spinner)findViewById(R.id.w_ractv_land);
+        part_WS_ACTV.setAdapter(oneAdapter);
+        hitLand();
 
 }
     public void back(View v){
         this.finish();
     }
 
-    public void hitLand(String hit,List<String> list,ArrayAdapter adapter, Map<String,Integer> map){
-        Map<String,Integer> dataMap= ApiService.getInstance().hitSearchEnableLand(hit);
+    public void hitLand(){
+        Map<String,Integer> dataMap= ApiService.getInstance().hitSearchEnableLand();
 
-       list.clear();
-       map.clear();
+        oneList.clear();
+       onemap.clear();
        Set<String> keySet= dataMap.keySet();
        for (String name:keySet){
-           map.put(name,dataMap.get(name));
-           list.add(name);
+           onemap.put(name,dataMap.get(name));
+           oneList.add(name);
        }
-       adapter.notifyDataSetChanged();
+        oneAdapter.notifyDataSetChanged();
     }
     public void showChooseDay(View v){
 
@@ -292,7 +189,8 @@ public class WorkRecordActivity extends AppCompatActivity {
         workRecord.setWorkDay(workDayView.getText().toString());
         switch (workRecord.getTimeType().getId()){
             case 1:{
-                String landName=oneACTV.getText().toString().trim();
+
+                String landName=oneACTV.getSelectedItem().toString().trim();
                 if(landName.length()<=0){
                     Toast.makeText(instance,"请输入选择工地", Toast.LENGTH_SHORT).show();
                     return;
@@ -375,12 +273,12 @@ public class WorkRecordActivity extends AppCompatActivity {
                            }
                            workTime.setPayType(payType);
                            Land land=new Land();
-                           String landName=part_SW_ACTV.getText().toString().trim();
+                           String landName=part_SW_ACTV.getSelectedItem().toString().trim();
                            if(landName.length()<=0){
                                Toast.makeText(instance,"请输入选择工地", Toast.LENGTH_SHORT).show();
                                return;
                            }
-                           land.setId(smap.get(landName));
+                           land.setId(onemap.get(landName));
                            land.setName(landName);
                            land.setStatus(0);
                            workTime.setLand(land);
@@ -417,12 +315,12 @@ public class WorkRecordActivity extends AppCompatActivity {
                            workTime.setPayType(payType);
                            Land land=new Land();
 
-                           String landName=part_XW_ACTV.getText().toString().trim();
+                           String landName=part_XW_ACTV.getSelectedItem().toString().trim();
                            if(landName.length()<=0){
                                Toast.makeText(instance,"请输入选择工地", Toast.LENGTH_SHORT).show();
                                return;
                            }
-                           land.setId(xmap.get(landName));
+                           land.setId(onemap.get(landName));
                            land.setName(landName);
                            land.setStatus(0);
                            workTime.setLand(land);
@@ -457,12 +355,12 @@ public class WorkRecordActivity extends AppCompatActivity {
                            }
                            workTime.setPayType(payType);
                            Land land=new Land();
-                           String landName=part_WS_ACTV.getText().toString().trim();
+                           String landName=part_WS_ACTV.getSelectedItem().toString().trim();
                            if(landName.length()<=0){
                                Toast.makeText(instance,"请输入选择工地", Toast.LENGTH_SHORT).show();
                                return;
                            }
-                           land.setId(wmap.get(landName));
+                           land.setId(onemap.get(landName));
                            land.setName(landName);
                            land.setStatus(0);
                            workTime.setLand(land);
