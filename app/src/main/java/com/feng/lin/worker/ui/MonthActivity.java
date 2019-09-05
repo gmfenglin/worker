@@ -36,6 +36,7 @@ public class MonthActivity extends AppCompatActivity {
     private static MonthActivity instance;
     private  List<Map<String,Object>> adapterData=new ArrayList<>();
    private List<Map<String,Object>> monthList=new ArrayList<>();
+   private  MonthDeatilAdapter monthadapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class MonthActivity extends AppCompatActivity {
          accountId= intent.getStringExtra("accountId");
          String accountName=  intent.getStringExtra("accountName");
         TextView tvAccountName= (TextView) findViewById(R.id.tv_month_account_name);
+        monthadapter=new MonthDeatilAdapter(adapterData,instance);
         tvAccountName.setText(accountName);
         Calendar cal = Calendar.getInstance();
        int year= cal.get(Calendar.YEAR);
@@ -79,13 +81,13 @@ public class MonthActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(view);
         ListView listView=(ListView)view.findViewById(R.id.lv_month_detail);
-        MonthDeatilAdapter adapter=new MonthDeatilAdapter(adapterData,instance);
-        listView.setAdapter(adapter);
+
+        listView.setAdapter(monthadapter);
         adapterData.clear();
         for (Map<String,Object> map:data){
             adapterData.add(map);
         }
-        adapter.notifyDataSetChanged();
+        monthadapter.notifyDataSetChanged();
         TextView tvDay=(TextView) view.findViewById(R.id.tv_month_detail_day);
         tvDay.setText(day);
         builder.setNegativeButton("取消",

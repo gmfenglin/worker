@@ -50,7 +50,10 @@ public class CalendarAdapter extends BaseAdapter {
   private Set<String> mSet = null;
   private List<Map<String,Object>> monthList;
   private List<String> monthDayList=new ArrayList<>();
+  private List<Integer> positionList=new ArrayList<>();
   private boolean dFlag;
+  private int count;
+
   /**
    * 距离当前月的差(上一个月-1,当前月0,下一个月+1)
    */
@@ -64,13 +67,16 @@ public class CalendarAdapter extends BaseAdapter {
     currentMonth = month; //得到跳转到的月份
     this.currentDayStr = currentDayStr;
     this.monthList=monthList;
+
     getCalendar(currentYear, currentMonth);
+
   }
 
   @Override
   public void notifyDataSetChanged() {
     dFlag=false;
     monthDayList.clear();
+    positionList.clear();
     super.notifyDataSetChanged();
   }
 
@@ -91,8 +97,9 @@ public class CalendarAdapter extends BaseAdapter {
  
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
+
     ViewHolder myViewHolder = null;
-    if (convertView == null ) {
+   if (convertView == null ) {
       convertView = LayoutInflater.from(context).inflate(R.layout.item_select_time, null);
       myViewHolder = new ViewHolder();
 
@@ -100,8 +107,10 @@ public class CalendarAdapter extends BaseAdapter {
       myViewHolder.mIdTvItemSelectTimeDay.setBackgroundColor(0);
       convertView.setTag(myViewHolder);
     } else {
+
       myViewHolder = (ViewHolder) convertView.getTag();
     }
+
     myViewHolder.mIdTvItemSelectTimeDay.setText(dayNumber[position]);
     myViewHolder.mIdTvItemSelectTimeDay.setTextColor(Color.GRAY);//不是当前月为灰
 
@@ -116,6 +125,16 @@ public class CalendarAdapter extends BaseAdapter {
 
     if(!dFlag&&Integer.parseInt(dayNumber[position])==1&&monthDayList.size()==0){
       dFlag=true;
+    }
+    if(!positionList.contains(position)){
+      positionList.add(position);
+    }else {
+      monthDayList.remove(dayNumber[position]);
+      for (Map<String,Object> map:monthList){
+        if(map.get("work_day").equals(getShowYear()+"-"+getShowMonth()+"-"+getStr(dayNumber[position],2))){
+          map.put("did",0);
+        }
+      }
     }
     if(dFlag&&!monthDayList.contains(dayNumber[position])){
       monthDayList.add(dayNumber[position]);
@@ -151,6 +170,8 @@ public class CalendarAdapter extends BaseAdapter {
         String dayString=getShowYear()+"-"+getShowMonth()+"-"+getStr(dayNumber[position],2);
         boolean tFlag=false;
         for (Map<String,Object> map:monthList){
+            if(map.get("work_day").equals(dayString))
+            SimpleLogger.getInstance().log(map.get("did").toString());
           if(map.get("work_day").equals(dayString) && map.get("did").equals(0)){
             map.put("did",1);
             tFlag=true;
@@ -206,7 +227,7 @@ public class CalendarAdapter extends BaseAdapter {
  
 
  
- 
+
     return convertView;
   }
  
